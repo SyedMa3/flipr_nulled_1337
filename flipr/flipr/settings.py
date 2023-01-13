@@ -129,3 +129,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK={'DEFAULT_AUTHENTICATION_CLASSES':['knox.auth.TokenAuthentication',]}
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIT_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nulled.1337.flipr@gmail.com'
+EMAIL_HOST_PASSWORD = 'nulled-1337-flipr'
+EMAIL_USE_SSL= False
+# EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
