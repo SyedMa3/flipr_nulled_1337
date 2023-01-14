@@ -2,6 +2,9 @@
 
 
 superuser
-id: flipr_admin
-email: 122001010@smail.iitpkd.ac.in
-password: flipr@123
+
+    id: flipr_admin
+
+    email: 122001010@smail.iitpkd.ac.in
+    
+    password: flipr@123
