@@ -1,10 +1,9 @@
 # flipr_nulled_1337
 
+## Superuser creds
 
-superuser
-
-    id: flipr_admin
-
-    email: 122001010@smail.iitpkd.ac.in
-    
-    password: flipr@123
+```bash
+python manage.py createsuperuser
+email: admin@admin.com
+password: admin
+```
