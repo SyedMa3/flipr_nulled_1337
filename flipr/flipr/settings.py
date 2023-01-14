@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'user',
-    'django_rest_passwordreset'
+    'django_rest_passwordreset',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,13 +130,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 REST_FRAMEWORK={'DEFAULT_AUTHENTICATION_CLASSES':['knox.auth.TokenAuthentication',]}
 
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIT_PORT = 587
-EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nulled.1337.flipr@gmail.com'
-EMAIL_HOST_PASSWORD = 'nulled-1337-flipr'
-EMAIL_USE_SSL= False
+EMAIL_HOST_PASSWORD = 'akxzgipxdzzwkrff'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL= True
 # EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
