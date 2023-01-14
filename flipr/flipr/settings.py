@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
-    'user',
     'django_rest_passwordreset',
     'corsheaders',
+    'user',
+    'companies',
 ]
 
 MIDDLEWARE = [
