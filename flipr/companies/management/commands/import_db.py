@@ -32,10 +32,11 @@ class Command(BaseCommand):
         ]
 
         for i in companyNames:
+            temp = i
             i = BASE + i
             with open(i) as f:
                 c, created = Company.objects.get_or_create(
-                    name = i
+                    name = temp
                 )
                 reader = csv.reader(f)
                 next(reader, None)
@@ -52,10 +53,11 @@ class Command(BaseCommand):
                     )
         print("===========================\n\n")
         for i in marketNames:
+            temp = i
             i = BASE + i
             with open(i) as f:
                 c, created = StockMarket.objects.get_or_create(
-                    name = i
+                    name = temp
                 )
                 reader = csv.reader(f)
                 next(reader, None)
