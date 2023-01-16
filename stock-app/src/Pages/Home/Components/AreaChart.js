@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import fetchData from "./fetchData";
 
 export default function AreaChart(props) {
   const [data, setdata] = useState([]);
 
-  console.log(props.stock);
+  // console.log(props.stock);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("tt");
+      // console.log("tt");
       let url = "https://nulled1337.pythonanywhere.com/data/market/";
       if (props.stock === "nse") {
         url = url + `${props.stock}` + "vcsv";
@@ -38,9 +37,10 @@ export default function AreaChart(props) {
     fetchData();
   }, [props.stock]);
 
-  console.log(data);
+  // console.log(data);
   const series1 = [
     {
+      name: "Closing",
       data: data,
     },
   ];

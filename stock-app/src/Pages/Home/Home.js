@@ -12,6 +12,11 @@ export default function Home() {
   const navigate = useNavigate();
   const auth = useAuthUser();
   const [stock, setStock] = useState("nse");
+  const [company, setCompany] = useState("");
+
+  const changeCompanyHandler = (e) => {
+    setCompany(e.target.value);
+  };
 
   const NSEDataHandler = () => {
     setStock("nse");
@@ -49,10 +54,7 @@ export default function Home() {
       <nav>
         <div className="container main-nav flex">
           <a href="#" className="company-logo">
-            <img
-              src="https://i.postimg.cc/pXw2P5QZ/D4-E1l1g-WAAApft-P.jpg"
-              alt=""
-            ></img>
+            <img src="https://i.postimg.cc/P5KYP2h1/400-2002.png" alt=""></img>
           </a>
           <div className="nav-links">
             <ul className="flex">
@@ -83,10 +85,10 @@ export default function Home() {
 
       <header>
         <div className="container header-section-2 flex">
-          <button className="button-6" type="button" onClick={NSEDataHandler}>
+          <button className="button-1" type="button" onClick={NSEDataHandler}>
             NSE
           </button>
-          <button className="button-6" type="button" onClick={BSEDataHandler}>
+          <button className="button-1" type="button" onClick={BSEDataHandler}>
             BSE
           </button>
         </div>
@@ -96,19 +98,66 @@ export default function Home() {
         </div>
         <div className="container header-section flex">
           <div className="header-left">
-            <h1>11,079.16</h1>
-            <h3>
+            <h1>17,755.45</h1>
+            <h3 className="profit">
               <Triangle></Triangle> 78.05(0.71%)
             </h3>
-            <h6>As on 14 Jan, 2023 | 02:18 IST</h6>
+            <h6>As on 12 Jan, 2023 | 02:18 IST</h6>
           </div>
-          <div className="header-middle">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea.
-            </p>
+          <div className="header-middle-3">
+            <div>
+              <div>
+                <h4>Day Range</h4>
+                <div className="section-2 flex-2">
+                  <p id="rangeValue">17745.56</p>
+                  <p id="rangeValue">17569.69</p>
+                </div>
+
+                <div>
+                  <label for="low">L </label>
+                  <input
+                    className="slider"
+                    type="range"
+                    min="0"
+                    max="200"
+                    value="100"
+                  ></input>
+                  <label for="high">H </label>
+                </div>
+              </div>
+              <div>
+                <h4>52 WEEK RANGE</h4>
+                <div className="section-2 flex-2">
+                  <p id="rangeValue">17745.56</p>
+                  <p id="rangeValue">17569.69</p>
+                </div>
+
+                <div>
+                  <label for="low">L </label>
+                  <input
+                    className="slider"
+                    type="range"
+                    min="0"
+                    max="200"
+                    value="100"
+                  ></input>
+                  <label for="high">H </label>
+                </div>
+              </div>
+              <div>
+                <h4>RETURN</h4>
+                <div className="section-3 flex">
+                  <select
+                    className="return-bar-button"
+                    name="returns"
+                    id="returns"
+                  >
+                    <option value="ytd">YTD</option>
+                  </select>
+                  <h5 className="profit-2">3.55%</h5>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="header-right">
             <AreaChart stock={stock}></AreaChart>
@@ -118,8 +167,9 @@ export default function Home() {
 
       <section className="section-1">
         <div className="container">
-          <div className="nav-links">
-            <ul className="flex-2">
+          <div className="nav-links-2">
+            <hr id="line-bar-1"></hr>
+            <ul className="flex">
               <li>
                 <button type="button" className="other-button">
                   OVERVIEW
@@ -156,6 +206,7 @@ export default function Home() {
                 </button>
               </li>
             </ul>
+            <hr id="line-bar-1"></hr>
           </div>
         </div>
       </section>
@@ -206,18 +257,24 @@ export default function Home() {
           <h2>ADVANCED CHART</h2>
         </div>
         <div className="container header-section-4">
-          {/* <label for="stocks">STOCKS:</label> */}
-
-          <select className="stocks-bar-button" name="stocks" id="stocks">
-            <option value="ashokley">ASHOKLEY</option>
-            <option value="cipla">CIPLA</option>
-            <option value="eichermot">EICHERMOT</option>
-            <option value="reliance">RELIANCE</option>
-            <option value="tata steel">TATA STEEL</option>
+          <select
+            className="stock-bar-button"
+            name="stocks"
+            id="stocks"
+            onChange={changeCompanyHandler}
+          >
+            <option value="temp">Choose</option>
+            <option value="ashokleynscsv">ASHOKLEY</option>
+            <option value="ciplanscsv">CIPLA</option>
+            <option value="eichermotnscsv">EICHERMOT</option>
+            <option value="reliancenscsv">RELIANCE</option>
+            <option value="tatasteelnscsv">TATA STEEL</option>
           </select>
         </div>
       </section>
-      <Chart></Chart>
+      <div className="container">
+        <Chart company={company}></Chart>
+      </div>
     </div>
   );
 }

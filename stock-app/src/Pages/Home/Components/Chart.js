@@ -1,17 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { useEffect } from "react";
+import axios from "axios";
 
-export default function Chart() {
+export default function Chart(props) {
+  const [labels, setLabels] = useState([]);
+  const [open, setOpen] = useState([]);
+  const [diff, setdiff] = useState([]);
+  console.log(props.company);
+  useEffect(() => {
+    const fetchData = async () => {
+      // console.log("tt");
+      let url = "https://nulled1337.pythonanywhere.com/data/company/";
+      url = url + `${props.company}`;
+      try {
+        const response = await axios.get(`${url}`);
+        console.log(response.data);
+        let array = [];
+        let price = [];
+        let profit = [];
+        for (let i of response.data.company_day) {
+          let date = i.date;
+          let date1 = date.replace(/-/g, "/");
+          // console.log(date1);
+          array.push(date1);
+          price.push(Number(i.close));
+          profit.push(Number(i.volume) / 100000);
+        }
+        setLabels(array);
+        setOpen(price);
+        setdiff(profit);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, [props.company]);
+
+  console.log(diff);
+  // console.log(open);
+  // console.log(labels);
+
   const series = [
     {
-      name: "TEAM A",
+      name: "Volume(10^-5)",
       type: "column",
-      data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+      // data: [
+      //   [1327359600000, 20.95],
+      //   [1327446000000, 11.34],
+      //   [1327532400000, 51.18],
+      //   [1327618800000, 41.05],
+      //   [1327878000000, 21.0],
+      // ],
+      data: diff,
     },
     {
-      name: "TEAM B",
+      name: "Closing",
       type: "area",
-      data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+      // data: [
+      //   [1327359600000, 30.95],
+      //   [1327446000000, 31.34],
+      //   [1327532400000, 31.18],
+      //   [1327618800000, 31.05],
+      //   [1327878000000, 31.0],
+      // ],
+
+      data: open,
     },
     // {
     //   name: "TEAM C",
@@ -28,7 +83,6 @@ export default function Chart() {
     },
     stroke: {
       width: [0, 2, 5],
-      //   curve: "smooth",
     },
     plotOptions: {
       bar: {
@@ -47,32 +101,23 @@ export default function Chart() {
         stops: [0, 100, 100, 100],
       },
     },
-    labels: [
-      "01/01/2003",
-      "02/01/2003",
-      "03/01/2003",
-      "04/01/2003",
-      "05/01/2003",
-      "06/01/2003",
-      "07/01/2003",
-      "08/01/2003",
-      "09/01/2003",
-      "10/01/2003",
-      "11/01/2003",
-    ],
+    labels: labels,
     markers: {
       size: 0,
     },
     xaxis: {
       type: "datetime",
-    },
-    yaxis: {
-      title: {
-        text: "Points",
+      labels: {
+        format: "yyyy/MM/dd",
       },
-      min: 0,
+      tickAmount: 6,
     },
+    yaxis: {},
+
     tooltip: {
+      x: {
+        format: "dd MMM yyyy",
+      },
       shared: true,
       intersect: false,
       y: {
