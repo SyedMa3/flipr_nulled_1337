@@ -2,6 +2,8 @@
 
 ## Setup
 
+### Backend
+
 Do this only once, while you are in the folder `flipr_nulled_1337/flipr`
 
 ```bash
@@ -26,10 +28,34 @@ To start the server:
 python manage.py runserver
 ```
 
-### Superuser creds
+### Frontend
 
-```bash
-python manage.py createsuperuser
-email: admin@admin.com
-password: admin
-```
+## Database Design
+
+- Company
+  - Name
+  - CompanyDay(One to Many relationship)
+
+- StockMarket
+  - Name
+  - MarketDay(One to Many relationship)
+
+- CompanyDay
+  - Date
+  - Open
+  - Close
+  - Low
+  - High
+  - Adj Close
+  - Volume
+  - Company(Many to One relationship)
+
+- MarketDay
+  - Date
+  - Open
+  - Close
+  - Low
+  - High
+  - Adj Close
+  - Volume
+  - StockMarket(Many to One relationship)
