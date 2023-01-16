@@ -60,7 +60,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(
-        "http://nulled1337.pythonanywhere.com/api/register/",
+        "https://nulled1337.pythonanywhere.com/api/register/",
         body,
         {
           headers: headers,
